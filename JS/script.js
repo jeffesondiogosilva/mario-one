@@ -1,11 +1,13 @@
 const mario = document.querySelector('.mario');
 
-// const audio = document.querySelector('.audio');
+
 
 function tocar (){
     const audio = new Audio('Super-Mario.mp3');
     audio.play();
     audio.loop = true;    
+
+    
 }
 
 
@@ -29,9 +31,9 @@ const loop = setInterval(() => {
 
     
     const pipePosition = pipe.offsetLeft;
-    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');
+    const marioPosition = +window.getComputedStyle(mario).bottom.replace('px', '');  //posição vertical
 
-    if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 80) {
+    if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 40) {
 
         pipe.style.animation = 'none';        
         pipe.style.left = `${pipePosition}px`;
@@ -41,8 +43,8 @@ const loop = setInterval(() => {
 
         mario.src = './images/game-over.png';
         mario.style.width = '75px';
-        mario.style.marginLeft = '50px';
-        mario.style.marginBottom = '30px';
+        mario.style.marginLeft = '45px';
+        mario.style.marginBottom = '100px';
 
 
         clearInterval(loop);
@@ -52,10 +54,29 @@ const loop = setInterval(() => {
 
 
 if (window.screen.width < 768) {
-    
+
     document.addEventListener('touchstart', jump);
+
+    if (pipePosition <= 120 && pipePosition > 0 && marioPosition < 40) {
+
+        pipe.style.animation = 'none';        
+        pipe.style.left = `${pipePosition}px`;
+
+        mario.style.animation = 'none';        
+        mario.style.bottom = `${marioPosition}px`;
+
+        mario.src = './images/game-over.png';
+        mario.style.width = '40px';
+        mario.style.marginLeft = '45px';
+        mario.style.marginBottom = '200px';
+
+
+        clearInterval(loop);
+    }
+    
+   
 } else {
     document.addEventListener('keydown', jump);
 }
 
-document.addEventListener('onreload', tocar());
+// document.addEventListener('onreload', tocar());
